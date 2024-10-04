@@ -117,6 +117,7 @@ def pertanyaan_1():
         plt.ylabel('korelasi dengan temperatur')
         plt.title('Korelasi musim terhadap temperatur dan polutan')
         plt.xticks(x + width*1.5, pollutants, rotation=45)
+        plt.legend()
     analyze_seasonal_correlations(df_all_clean)
     st.pyplot(plt)
     
