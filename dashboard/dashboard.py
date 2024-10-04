@@ -25,36 +25,11 @@ def input_data():
 
     return (
         df_all_clean,
-        df_Aotizhongxin,
-        df_Changping,
-        df_Dingling,
-        df_Dongsi,
-        df_Guanyuan,
-        df_Gucheng,
-        df_Huairou,
-        df_Nongzhanguan,
-        df_Shunyi,
-        df_Tiantan,
-        df_Wanliu,
-        df_Wanshouxigong,
+        df_Aotizhongxin, df_Changping, df_Dingling, df_Dongsi, df_Guanyuan, df_Gucheng, df_Huairou, df_Nongzhanguan, df_Shunyi, df_Tiantan, df_Wanliu, df_Wanshouxigong
     )
 
 
-(
-    df_all_clean,
-    df_Aotizhongxin,
-    df_Changping,
-    df_Dingling,
-    df_Dongsi,
-    df_Guanyuan,
-    df_Gucheng,
-    df_Huairou,
-    df_Nongzhanguan,
-    df_Shunyi,
-    df_Tiantan,
-    df_Wanliu,
-    df_Wanshouxigong,
-) = input_data()
+(df_all_clean, df_Aotizhongxin, df_Changping, df_Dingling, df_Dongsi, df_Guanyuan, df_Gucheng, df_Huairou, df_Nongzhanguan, df_Shunyi, df_Tiantan, df_Wanliu, df_Wanshouxigong)= input_data()
 
 st.sidebar.title("Air Quality Index")
 menu = st.sidebar.selectbox(
