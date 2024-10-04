@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
 
-@st.cache_data
+
 def input_data():
     df_all_clean = pd.read_csv("dashboard/clean_merged_dataset.csv")
     df_Aotizhongxin = pd.read_csv("Air-quality-dataset/PRSA_Data_Aotizhongxin_20130301-20170228.csv")
