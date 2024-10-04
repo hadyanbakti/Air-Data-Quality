@@ -259,9 +259,18 @@ if menu == "Home":
     """)
     st.subheader("Deskripsi Data")
     st.write(df_all_clean.describe())
-    st.subheader("korelasi polutant dan suhu")
-    analyze_seasonal_correlations(df_all_clean)
-
+    st.subheader("Visualisasi polutant tiap tahun")
+    yearly_co = df_all_clean.groupby(['year', 'station'])['CO'].mean().unstack()
+    # Plotting
+    plt.figure(figsize=(15, 10))
+    yearly_co.plot(marker="o")
+    plt.title("Rata-rata Tingkat CO per Tahun untuk Setiap Kota")
+    plt.xlabel("Tahun")
+    plt.ylabel("Rata-rata Tingkat CO")
+    plt.xticks(yearly_co.index.astype(int), rotation=45)
+    plt.legend(title="Kota", bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.tight_layout()
+    st.pyplot(plt)
 elif menu == "Show Dataset":
     st.title("Air Quality Dataset berdasarkan Wilayah di Beijing, China.")
     selected_wilayah = st.sidebar.selectbox("Pilih Wilayah:", list(wilayah_dict.keys()))
