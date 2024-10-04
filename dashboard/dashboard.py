@@ -259,10 +259,6 @@ if menu == "Home":
     st.subheader("Deskripsi Data")
     st.write(df_all_clean.describe())
     st.subheader("korelasi polutant dan suhu")
-    plt.xlabel('Pollutan')
-    plt.ylabel('korelasi dengan temperatur')
-    plt.title('Korelasi musim terhadap temperatur dan polutan')
-    plt.xticks(x + width*1.5, pollutants, rotation=45)
     analyze_seasonal_correlations(df_all_clean)
     st.pyplot(plt)
 
