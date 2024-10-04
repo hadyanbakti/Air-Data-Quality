@@ -159,7 +159,7 @@ def pertanyaan_3():
     st.pyplot(plt)
 
     for wilayah in yearly_co.columns:
-        total_change = yearly_co[wilayah].iloc[-1] - yearly_co[city].iloc[0]
+        total_change = yearly_co[wilayah].iloc[-1] - yearly_co[wilayah].iloc[0]
         st.write(
             f"Perubahan keseluruhan tingkat CO untuk {wilayah} dari {yearly_co.index[0]} ke {yearly_co.index[-1]}: {total_change:.2f}"
         )
