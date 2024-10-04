@@ -145,9 +145,6 @@ def pertanyaan_3():
    
     yearly_co = df_all_clean.groupby(['year', 'station'])['CO'].mean().unstack()
 
-   
-   
-
     # Plotting
     plt.figure(figsize=(15, 10))
     yearly_co.plot(marker="o")
@@ -155,16 +152,16 @@ def pertanyaan_3():
     plt.xlabel("Tahun")
     plt.ylabel("Rata-rata Tingkat CO")
     plt.xticks(yearly_co.index.astype(int), rotation=45)
-    plt.legend(title="Kota", bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.legend(title="Wilayah", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
 
 
     st.pyplot(plt)
 
-    for city in yearly_co.columns:
+    for wilayah in yearly_co.columns:
         total_change = yearly_co[city].iloc[-1] - yearly_co[city].iloc[0]
         st.write(
-            f"Perubahan keseluruhan tingkat CO untuk {city} dari {yearly_co.index[0]} ke {yearly_co.index[-1]}: {total_change:.2f}"
+            f"Perubahan keseluruhan tingkat CO untuk {wilayah} dari {yearly_co.index[0]} ke {yearly_co.index[-1]}: {total_change:.2f}"
         )
 
     # Insight/Kesimpulan
