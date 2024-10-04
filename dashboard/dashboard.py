@@ -234,17 +234,23 @@ if menu == "Home":
     """)
     st.subheader("Deskripsi Data")
     st.write(df_all_clean.describe())
-    st.subheader("Visualisasi polutant tiap tahun")
-    yearly_co = df_all_clean.groupby(['year', 'station'])['CO'].mean().unstack()
+     st.subtitle("Heatmap Korelasi antara Temperatur Dan Pollutant")
+    
+    # select maching variable
+    pollutants = ['PM2.5', 'PM10', 'SO2', 'NO2', 'CO', 'O3', 'TEMP']
+    correlation_data = df_all_clean[pollutants]
+    
+    # Calculate the correlation matrix
+    correlation_matrix = correlation_data.corr()
+    
     # Plotting
-    plt.figure(figsize=(15, 10))
-    yearly_co.plot(marker="o")
-    plt.title("Rata-rata Tingkat CO per Tahun untuk Setiap Kota")
-    plt.xlabel("Tahun")
-    plt.ylabel("Rata-rata Tingkat CO")
-    plt.xticks(yearly_co.index.astype(int), rotation=45)
-    plt.legend(title="Kota", bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0, fmt=".2f", linewidths=.5)
+    plt.title("Correlation Heatmap Between Temperature and Pollutants")
+    plt.xticks(rotation=45)
+    plt.yticks(rotation=0)
     plt.tight_layout()
+    
     st.pyplot(plt)
 elif menu == "Show Dataset":
     st.title("Air Quality Dataset berdasarkan Wilayah di Beijing, China.")
