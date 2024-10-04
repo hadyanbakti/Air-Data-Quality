@@ -234,7 +234,7 @@ if menu == "Home":
     """)
     st.subheader("Deskripsi Data")
     st.write(df_all_clean.describe())
-     st.subtitle("Heatmap Korelasi antara Temperatur Dan Pollutant")
+    st.subheader("Heatmap Korelasi antara Temperatur Dan Pollutant")
     
     # select maching variable
     pollutants = ['PM2.5', 'PM10', 'SO2', 'NO2', 'CO', 'O3', 'TEMP']
