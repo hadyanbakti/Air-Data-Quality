@@ -6,44 +6,20 @@ import numpy as np
 from scipy import stats
 
 @st.cache_data
-def load_data():
+def input_data():
     df_all_clean = pd.read_csv("dashboard/clean_merged_dataset.csv")
-    df_Aotizhongxin = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Aotizhongxin_20130301-20170228.csv"
-    )
-    df_Changping = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Changping_20130301-20170228.csv"
-    )
-    df_Dingling = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Dingling_20130301-20170228.csv"
-    )
-    df_Dongsi = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Dongsi_20130301-20170228.csv"
-    )
-    df_Guanyuan = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Guanyuan_20130301-20170228.csv"
-    )
-    df_Gucheng = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Gucheng_20130301-20170228.csv"
-    )
-    df_Huairou = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Huairou_20130301-20170228.csv"
-    )
-    df_Nongzhanguan = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Nongzhanguan_20130301-20170228.csv"
-    )
-    df_Shunyi = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Shunyi_20130301-20170228.csv"
-    )
-    df_Tiantan = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Tiantan_20130301-20170228.csv"
-    )
-    df_Wanliu = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Wanliu_20130301-20170228.csv"
-    )
-    df_Wanshouxigong = pd.read_csv(
-        "Air-quality-dataset/PRSA_Data_Wanshouxigong_20130301-20170228.csv"
-    )
+    df_Aotizhongxin = pd.read_csv("Air-quality-dataset/PRSA_Data_Aotizhongxin_20130301-20170228.csv")
+    df_Changping = pd.read_csv("Air-quality-dataset/PRSA_Data_Changping_20130301-20170228.csv")
+    df_Dingling = pd.read_csv("Air-quality-dataset/PRSA_Data_Dingling_20130301-20170228.csv")
+    df_Dongsi = pd.read_csv("Air-quality-dataset/PRSA_Data_Dongsi_20130301-20170228.csv")
+    df_Guanyuan = pd.read_csv("Air-quality-dataset/PRSA_Data_Guanyuan_20130301-20170228.csv")
+    df_Gucheng = pd.read_csv("Air-quality-dataset/PRSA_Data_Gucheng_20130301-20170228.csv")
+    df_Huairou = pd.read_csv("Air-quality-dataset/PRSA_Data_Huairou_20130301-20170228.csv")
+    df_Nongzhanguan = pd.read_csv("Air-quality-dataset/PRSA_Data_Nongzhanguan_20130301-20170228.csv")
+    df_Shunyi = pd.read_csv("Air-quality-dataset/PRSA_Data_Shunyi_20130301-20170228.csv")
+    df_Tiantan = pd.read_csv("Air-quality-dataset/PRSA_Data_Tiantan_20130301-20170228.csv")
+    df_Wanliu = pd.read_csv("Air-quality-dataset/PRSA_Data_Wanliu_20130301-20170228.csv")
+    df_Wanshouxigong = pd.read_csv("Air-quality-dataset/PRSA_Data_Wanshouxigong_20130301-20170228.csv")
 
 
 
@@ -78,7 +54,7 @@ def load_data():
     df_Tiantan,
     df_Wanliu,
     df_Wanshouxigong,
-) = load_data()
+) = input_data()
 
 st.sidebar.title("Air Quality Index")
 menu = st.sidebar.selectbox(
@@ -113,7 +89,6 @@ def pertanyaan_1():
     
     # Menghitung korelasi
     def analyze_seasonal_correlations(df):
-    # Assuming 'month' column exists in the dataframe instead of 'date_time'
         df['season'] = pd.cut(df['month'], 
                           bins=[0, 3, 6, 9, 12], 
                           labels=['Winter', 'Spring', 'Summer', 'Fall'])
@@ -191,10 +166,10 @@ def pertanyaan_3():
         "Bagaimana tren tahunan tingkat rata-rata CO di berbagai kota dari 2013 hingga 2017 dan apakah ada pola umum yang terlihat?"
     )
 
-    # Mengonversi kolom date_time menjadi datetime
+   
     yearly_co = df_all_clean.groupby(['year', 'station'])['CO'].mean().unstack()
 
-    # Menghitung rata-rata SO2 per tahun untuk setiap kota
+   
    
 
     # Plotting
@@ -202,15 +177,14 @@ def pertanyaan_3():
     yearly_co.plot(marker="o")
     plt.title("Rata-rata Tingkat CO per Tahun untuk Setiap Kota")
     plt.xlabel("Tahun")
-    plt.ylabel("Rata-rata Tingkat CO (µg/m³)")
+    plt.ylabel("Rata-rata Tingkat CO")
     plt.xticks(yearly_co.index.astype(int), rotation=45)
     plt.legend(title="Kota", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
 
-    # Tampilkan plot di Streamlit
+
     st.pyplot(plt)
 
-    # Menghitung perubahan keseluruhan tingkat SO2 untuk setiap kota
     for city in yearly_co.columns:
         total_change = yearly_co[city].iloc[-1] - yearly_co[city].iloc[0]
         st.write(
@@ -273,7 +247,7 @@ def conclusion():
 
 # Main execution
 if menu == "Home":
-    st.title("Air Quality Dataset")
+    st.title("Dashboard For Air Quality Inddex")
     st.markdown("""
        Air Quality atau kualitas udara adalah ukuran kebersihan udara
        di lingkungan tersebut. Hal-hal yang mempengaruhi kualitas udara
@@ -284,7 +258,7 @@ if menu == "Home":
     """)
     st.subheader("Deskripsi Data")
     st.write(df_all_clean.describe())
-    st.subheader("Head of Clean Dataframe")
+    st.subheader("Dataset Yang sudah dibersihkan")
     st.dataframe(df_all_clean.head())
 
 elif menu == "Show Dataset":
