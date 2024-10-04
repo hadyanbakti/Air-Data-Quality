@@ -247,7 +247,7 @@ def conclusion():
 
 # Main execution
 if menu == "Home":
-    st.title("Dashboard For Air Quality Inddex")
+    st.title("Dashboard For Air Quality Index")
     st.markdown("""
        Air Quality atau kualitas udara adalah ukuran kebersihan udara
        di lingkungan tersebut. Hal-hal yang mempengaruhi kualitas udara
