@@ -261,7 +261,6 @@ if menu == "Home":
     st.write(df_all_clean.describe())
     st.subheader("korelasi polutant dan suhu")
     analyze_seasonal_correlations(df_all_clean)
-    st.pyplot(plt)
 
 elif menu == "Show Dataset":
     st.title("Air Quality Dataset berdasarkan Wilayah di Beijing, China.")
